@@ -1,3 +1,5 @@
+
+
 //WIFI INITIALIZATION
 //http://192.168.29.46/sen/sensordata.php?AQI=355
 //String server = "192.168.29.46";
@@ -83,7 +85,7 @@ void setup() {
   if(SerialESP8266.find("OK"))
     Serial.println("ESP8266 on STATION mode...");
   //Connecting to wifi
-  SerialESP8266.println("AT+CWJAP=\"srinjoy\",\"pradip2003\"");//enter WIFI PASSWORN AND SSID TO CONNECT
+  SerialESP8266.println("AT+CWJAP=\"Agnisha_Bhatta\",\"agnisha31\"");//enter WIFI PASSWORN AND SSID TO CONNECT
   Serial.println("Connnecting...");
   SerialESP8266.setTimeout(10000); //waiting for connection
   if(SerialESP8266.find("OK"))
@@ -197,20 +199,18 @@ String q7()
 }
 void neo6_m()
 {
-  while (ss.available() > 0)
+  while (ss.available())
     if (gps.encode(ss.read()))
     {
-      Serial.print(F("Location: ")); 
-      if (gps.location.isValid())
-      {
-         la=String(gps.location.lat());
+      Serial.print(F("Location: "));
+      float lat1=0.0, lon1=0.0; 
+      gps.f_get_position(&lat1,&lon1);
+      
+         la=String(lat1);
          
-         ln=String(gps.location.lng());
-      }
-       else
-       {
-    Serial.print(F("INVALID"));
-       }
+         ln=String(lon1);
+     
+       
     }
       
 }
